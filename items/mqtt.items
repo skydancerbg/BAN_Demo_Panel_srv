@@ -1,0 +1,8 @@
+Switch multisensor1_relay1              "Реле 1"                                    <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power1" }       
+Switch multisensor1_relay2              "Реле 2"                                    <switch>        { channel="mqtt:topic:localMQTTbroker:multisensor1:power2" }       
+Number multisensor1_DHT22_Temperature   "ТЕМПЕРАТУРА (AM2301) [%.1f °C]"            <temperature>   { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DHT22" }
+Number multisensor1_DHT22_Humidity      "ВЛАЖНОСТ (AM2301) [%.1f %%]"               <humidity>      { channel="mqtt:topic:localMQTTbroker:multisensor1:humidity_DHT22" }
+Number multisensor1_DHT22_Dewpoint      "ТОЧКА НА ОРОСЯВАНЕ (AM2301) [%.1f °C]"     <dewpoint>      { channel="mqtt:topic:localMQTTbroker:multisensor1:dewpoint_DHT22" }
+Number multisensor1_DS18B20_Temperature "ТЕМПЕРАТУРА (DS18B20) [%.1f °C]"           <temperature>   { channel="mqtt:topic:localMQTTbroker:multisensor1:temperature_DS18B20" }
+Number multisensor1_RSSI                "WiFi - СИЛА НА СИГНАЛА [%d %%]"            <network>       { channel="mqtt:topic:localMQTTbroker:multisensor1:rssi" }
+String multisensor1_Reachable           "Устройството е Online/Offline: [%s]"           <presence>      { channel="mqtt:topic:localMQTTbroker:multisensor1:reachable" }

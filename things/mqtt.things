@@ -1,0 +1,27 @@
+Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.10.10.100", port=1883, secure=false, username="deviceusr", password="devicepass", clientID="oh3srv" ]
+
+{
+
+    // {"Time":"2022-01-28T17:30:40","AM2301":{"Temperature":23.6,"Humidity":31.7,"DewPoint":5.8},"BH1750":{"Illuminance":15},"TempUnit":"C"}
+    Thing topic multisensor1 "Multisensor" @ "demo_panel" {
+    Channels:
+        Type switch : power1                "Power1"                [ stateTopic="stat/multisensor_t_h_l/POWER1", commandTopic="cmnd/multisensor_t_h_l/POWER1" ]
+        Type switch : power2                "Power2"                [ stateTopic="stat/multisensor_t_h_l/POWER2", commandTopic="cmnd/multisensor_t_h_l/POWER2" ] 
+        Type string : reachable             "Reachable"             [ stateTopic="tele/multisensor_t_h_l/LWT" ]
+        Type number : rssi                  "WiFi Signal Strength"  [ stateTopic="tele/multisensor_t_h_l/STATE",  transformationPattern="JSONPATH:$.Wifi.RSSI"]
+        Type number : temperature_DHT22     "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Temperature" ]
+        Type number : humidity_DHT22        "Humidity"              [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Humidity" ]        
+        Type number : dewpoint_DHT22        "Dewpoint"              [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.DewPoint" ]        
+        Type number : temperature_DS18B20   "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Temperature" ]
+      
+      
+      
+        // Type number : temperature   "Temperature"           [ stateTopic="tele/sonoff_th16_6/SENSOR", transformationPattern="JSONPATH:$.DS18B20.Temperature" ]
+
+        // Type number : temperature   "Temperature"           [ stateTopic="tele/in_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Temperature" ]
+        // Type number : humidity      "Humidity"              [ stateTopic="tele/in_1/SENSOR", transformationPattern="JSONPATH:$.SHT20.Humidity" ]        
+        // Type string : reachable     "Reachable"             [ stateTopic="tele/in_1/LWT" ]
+        // Type number : dewpoint      "Dew point"             [ stateTopic="tele/in_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.DewPoint" ]        
+    }
+
+}

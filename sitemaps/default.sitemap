@@ -18,4 +18,20 @@ sitemap default label="Demo server" {
             Text item=Sunrise_Time label="Изгрев"
             Text item=Sunset_Time label="Залез"
         }
+
+        Frame label="Ръчно управление на системи:" {
+            Switch  item=multisensor1_relay1   icon="switch"    label="Система 1 (Лампа 1)"
+            Switch  item=multisensor1_relay2   icon="switch"    label="Система 2 (Лампа 2)"
+ 
+        }
+        
+        Frame label="WiFi MQTT сензор базиран на NodeMCU (ESP_8266):" {
+            Text item= multisensor1_DHT22_Temperature 
+            Text item= multisensor1_DS18B20_Temperature 
+            Text item= multisensor1_DHT22_Humidity 
+            Text item= multisensor1_DHT22_Dewpoint 
+            Text item= multisensor1_RSSI 
+            Text item= multisensor1_Reachable
+            Text item=none
+        }
 }
