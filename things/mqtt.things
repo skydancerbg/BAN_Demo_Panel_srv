@@ -12,7 +12,7 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.10.10.100", port
         Type number : temperature_DHT22     "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Temperature" ]
         Type number : humidity_DHT22        "Humidity"              [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Humidity" ]        
         Type number : dewpoint_DHT22        "Dewpoint"              [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.DewPoint" ]        
-        Type number : temperature_DS18B20   "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.AM2301.Temperature" ]
+        Type number : temperature_DS18B20   "Temperature"           [ stateTopic="tele/multisensor_t_h_l/SENSOR", transformationPattern="JSONPATH:$.DS18B20.Temperature" ]
       
       
       

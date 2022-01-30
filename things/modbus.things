@@ -1,0 +1,90 @@
+
+// In the traditional standard, [entity] numbers for those entities start with a digit, followed by a number of four digits in range 1–9,999:
+// coils numbers start with a zero and then span from 00001 to 09999
+// discrete input numbers start with a one and then span from 10001 to 19999
+// input register numbers start with a three and then span from 30001 to 39999
+// holding register numbers start with a four and then span from 40001 to 49999
+// This translates into [entity] addresses between 0 and 9,998 in data frames.
+
+// !!! Note that entity begins counting at 1, data frame address at 0.
+
+/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!/////////////////////////
+    //!         !!! USEFULL LINKS  !!!
+    //
+    // MODBUS BINDING https://www.openhab.org/addons/bindings/modbus/
+    // USE Rapid SCADA Modbus Parser TO VISUALIZE MODBUS REQUEST/RESPONSE http://modbus.rapidscada.net/
+    // USE TERMITE TO TEST COMMUNICATION WITH THE DEVICE UNDER WIN10 http://s2-team.ru/wrkrs/prods/modbus-tools/termite/
+    // FOR ORNO ENERGY METERS USE THE WIN10 SOFTWARE PROVIDED ON THE MANUFACTURER SITE TO TEST COMMUNICATION AND SETUP THE METER 
+    // https://www.orno.pl/en/category/productData/4821/1-phase-multi-tariff-energy-meter-wtih-RS-485--100A
+//
+
+/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!/////////////////////////
+    //!         !!! IMPORTANT   !!!
+    //
+    //! WHEN editing Things, PERFORM a binding restart or a system reboot after editing. 
+    //! Changes in Things do not make it into pollers that are already running. !!!!!!
+
+    //! Start address to start reading the value. Use empty for write-only things.
+    //! Input as zero-based index number, e.g.:
+
+    //!!!!! in place of 400001 (first holding register), use the address "0". !!!
+    
+    //! Must be between (poller start) and (poller start + poller length - 1) (inclusive).
+/////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!/////////////////////////
+
+
+/////////----------------------------------------------------------/////////////////////////
+    //!   Light Intensity Sensor Temperature And Humidity - Slave address 0xA (10)
+ /////////----------------------------------------------------------/////////////////////////
+
+Bridge modbus:tcp:sensorTHL_id_10 [ host="10.10.10.101", port=502, id=10, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
+{
+
+    Bridge poller temperature [ start=0, length=1, refresh=30000, type="input" ] {
+        Thing data tempCelsius [ readStart="0", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+    }
+
+    Bridge poller humidity [ start=1, length=1, refresh=30000, type="input" ] {
+        Thing data humidity [ readStart="1", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+    }
+
+    Bridge poller luminosity [ start=2, length=1, refresh=30000, type="input" ] {
+        Thing data lux [ readStart="2", readValueType="uint16" ]
+    }
+}
+
+/////////----------------------------------------------------------/////////////////////////
+    //!  KM21B30-NH3 Amonia sensor - Slave address 0xB (11)
+ /////////----------------------------------------------------------/////////////////////////
+
+Bridge modbus:tcp:sensorNH3_id_11 [ host="10.10.10.101", port=502, id=11, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
+{
+//Start address to start reading the value. Use empty for write-only things.
+// Input as zero-based index number, e.g. in place of 400001 (first holding register), use the address "0".
+// Must be between (poller start) and (poller start + poller length - 1) (inclusive).
+
+    Bridge poller amonia [ start=0, length=1, refresh=30000, type="holding" ] {
+        Thing data nh3 [ readStart="0", readValueType="uint16", readTransform = "JS(divide100.js)" ]
+    }
+
+}
+
+/////////----------------------------------------------------------/////////////////////////
+    //!  Particulate Matter PM2.5/PM10 Sensor - Slave address 0xC (12)
+    //     holding 40001 - PM2.5
+    //     holding 40002 - PM10
+
+ /////////----------------------------------------------------------/////////////////////////
+
+Bridge modbus:tcp:sensorParticulateMatter [ host="10.10.10.101", port=502, id=12, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
+{
+//Start address to start reading the value. Use empty for write-only things.
+// Input as zero-based index number, e.g. in place of 400001 (first holding register), use the address "0".
+// Must be between (poller start) and (poller start + poller length - 1) (inclusive).
+
+    Bridge poller particulatematter [ start=0, length=2, refresh=30000, type="holding" ] {
+        Thing data pm2dot5 [ readStart="0", readValueType="uint16" ]
+        Thing data pm10    [ readStart="1", readValueType="uint16" ]
+    }
+
+}
