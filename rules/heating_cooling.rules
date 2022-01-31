@@ -22,7 +22,7 @@ then
     // if((multisensor1_DS18B20_Temperature.state as Number) < (virtual_Thermostat_Setpoint.state as Number) - (virtual_Thermostat_Delta_Temp.state as Number))) && (virtual_HeatingCooling_Switch.state as Number) == 1.0) 
     {
         // logInfo("heating multisensor1_relay1", ((virtual_Thermostat_Setpoint.state as Number) - (virtual_Thermostat_Delta_Temp.state as Number)).toString)
-		if(multisensor1_relay1.state == OFF || multisensor1_relay1.state == UNDEF) {
+		if(multisensor1_relay1.state == OFF || multisensor1_relay1.state == UNDEF || multisensor1_relay1.state == NULL) {
             logInfo("heating relay", "multisensor1_relay1 ON")
             multisensor1_relay1.sendCommand(ON)
             virtual_Heating_OnOff_Visualizer.sendCommand(ON)
@@ -32,7 +32,7 @@ then
     {
     // logInfo("w elsa", "temperaturata e po-goliama ot setpointa ИЛИ КОМАНДА OFF")
 		
-         if(multisensor1_relay1.state == ON || multisensor1_relay1.state == UNDEF) {
+         if(multisensor1_relay1.state == ON || multisensor1_relay1.state == UNDEF || multisensor1_relay1.state == NULL) {
                     logInfo("heating relay", "komanda OFF")
             multisensor1_relay1.sendCommand(OFF)
             virtual_Heating_OnOff_Visualizer.sendCommand(OFF)
