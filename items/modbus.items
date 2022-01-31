@@ -7,14 +7,17 @@
 // ?? profile gainOffset not working:
 // ?? Number:Temperature sesnsorTHL_Temperature    { channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"[ profile="modbus:gainOffset", gain="0.1 °C", pre-gain-offset="0" ] }
 
-Number:Temperature sesnsorTHL_Temperature   "Temperature [%.1f °C]" <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)       {channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"}
-Number sensorTHL_Humidity       "Humidity [%.1f %%Rh]"              <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:humidity:humidity:number"}
-Number sensorTHL_Luminosity     "Luminosity (Lux) [%d lux]"         <luminosity>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:luminosity:lux:number"}
+Number:Temperature sesnsorTHL_Temperature   "Temperature [%.1f °C]" <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)       {channel="modbus:data:sensorTHL_id_10:sensorData:tempCelsius:number"}
+Number sensorTHL_Humidity       "Humidity [%.1f %%Rh]"              <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:humidity:number"}
+Number sensorTHL_Luminosity     "Luminosity (Lux) [%d lux]"         <luminosity>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:lux:number"}
 
 Number sensorNH3_amonia         "Amonia (NH₃) [%.2f ppm]"           <amonia>        (gPersstOnChngOn1min)   {channel="modbus:data:sensorNH3_id_11:amonia:nh3:number"}
-// !!! CHANGE THIS TO POINT TO HE MEASURMENT OF THE REAL SENSOR, WHEN IT ARRIVES!!!!!!
-Number sensorNH3_methane        "Methane (CH₄) [%.2f ppm]"          <methane>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorNH3_id_11:amonia:nh3:number"}
 
 Number sensorPM_2dot5      "Particulate Matter (PM2.5)  [%d ppm]"   <dustsmall>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm2dot5:number"}
 Number sensorPM_10         "Particulate Matter (PM10)   [%d ppm]"   <dustbig>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm10:number"}
+
+Number sensorCH4_methane_lel                "Methane LEL (Lower Explosive Level) [%d %% LEL]"         <explosive>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:ch4_LEL:number"}
+Number sensorCH4_methane_ppm                "Methane (CH₄) [%d ppm]"                                  <methane>       (gPersstOnChngOn1min)   
+Number:Temperature sensorCH4_Temperature    "ТЕМПЕРАТУРА [%.1f °C]"                                     <temperature>   (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:temperatureC:number"}
+Number sensorCH4_Humidity                   "ВЛАЖНОСТ [%.1f %%Rh]"                                      <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:humidityPercent:number"}
 

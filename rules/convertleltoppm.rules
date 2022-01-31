@@ -1,0 +1,7 @@
+    rule "Convert CH4 LEL value to ppm for sensorCH4_methane_ppm"
+    when
+    	Item sensorCH4_methane_lel received update
+    then
+    	// sensorCH4_methane_ppm.sendCommand(((sensorCH4_methane_lel.state as Number) * 200).intValue)
+    	postUpdate(sensorCH4_methane_ppm, (((sensorCH4_methane_lel.state as Number) * 200).intValue))
+    end

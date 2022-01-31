@@ -40,17 +40,25 @@
 Bridge modbus:tcp:sensorTHL_id_10 [ host="10.10.10.101", port=502, id=10, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
 {
 
-    Bridge poller temperature [ start=0, length=1, refresh=30000, type="input" ] {
+    Bridge poller sensorData [ start=0, length=3, refresh=30000, type="input" ] {
         Thing data tempCelsius [ readStart="0", readValueType="uint16", readTransform = "JS(divide10.js)" ]
-    }
-
-    Bridge poller humidity [ start=1, length=1, refresh=30000, type="input" ] {
         Thing data humidity [ readStart="1", readValueType="uint16", readTransform = "JS(divide10.js)" ]
-    }
-
-    Bridge poller luminosity [ start=2, length=1, refresh=30000, type="input" ] {
         Thing data lux [ readStart="2", readValueType="uint16" ]
     }
+    // Reading registers one by one (as below) is inefficient!!!!!
+    // Bridge poller temperature [ start=0, length=1, refresh=30000, type="input" ] {
+    //     Thing data tempCelsius [ readStart="0", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+    // }
+
+    // Bridge poller humidity [ start=1, length=1, refresh=30000, type="input" ] {
+    //     Thing data humidity [ readStart="1", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+    // }
+
+    // Bridge poller luminosity [ start=2, length=1, refresh=30000, type="input" ] {
+    //     Thing data lux [ readStart="2", readValueType="uint16" ]
+    // }
+
+
 }
 
 /////////----------------------------------------------------------/////////////////////////
@@ -86,5 +94,41 @@ Bridge modbus:tcp:sensorParticulateMatter [ host="10.10.10.101", port=502, id=12
         Thing data pm2dot5 [ readStart="0", readValueType="uint16" ]
         Thing data pm10    [ readStart="1", readValueType="uint16" ]
     }
+
+}
+
+/////////----------------------------------------------------------/////////////////////////
+    //!  Particulate Matter PM2.5/PM10 Sensor - Slave address 0xC (12)
+    //     holding 40001 - Humidity
+    //     holding 40002 - Temperature
+    //     holding 40003 - Methane LEL
+
+ /////////----------------------------------------------------------/////////////////////////
+
+Bridge modbus:tcp:sensorMethaneTH [ host="10.10.10.101", port=502, id=13, timeBetweenTransactionsMillis=100, rtuEncoded=false ]
+{
+//Start address to start reading the value. Use empty for write-only things.
+// Input as zero-based index number, e.g. in place of 400001 (first holding register), use the address "0".
+// Must be between (poller start) and (poller start + poller length - 1) (inclusive).
+
+    // Bridge poller sensorvalues [ start=0, length=3, refresh=30000, type="holding" ] {
+    //     Thing data humidity     [ readStart="0", readValueType="uint16" ]
+    //     Thing data temperature  [ readStart="1", readValueType="uint16" ]
+    //     Thing data methane  [ readStart="2", readValueType="uint16" ]
+    // }
+
+    Bridge poller sensorData [ start=0, length=3, refresh=30000, type="holding" ] {
+        Thing data humidityPercent [ readStart="0", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+        Thing data temperatureC [ readStart="1", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+        Thing data ch4_LEL [ readStart="2", readValueType="uint16" ]
+    }
+
+    // Bridge poller temperature [ start=1, length=1, refresh=30000, type="holding" ] {
+    //     Thing data temperatureC [ readStart="1", readValueType="uint16", readTransform = "JS(divide10.js)" ]
+    // }
+
+    // Bridge poller methane [ start=2, length=1, refresh=30000, type="holding" ] {
+    //     Thing data ch4LEL [ readStart="2", readValueType="uint16" ]
+    // }
 
 }

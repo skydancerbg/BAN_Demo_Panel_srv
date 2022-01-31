@@ -26,9 +26,13 @@ sitemap default label="Demo server" {
             Text item= sensorTHL_Luminosity
             Text item=none
             Text item= sensorNH3_amonia
-            Text item=sensorNH3_methane
+            Text item= sensorCH4_methane_ppm            
             Text item= sensorPM_2dot5
             Text item= sensorPM_10
+            Text item= sensorCH4_methane_lel            
+            Text item=none
+            Text item= sensorCH4_Temperature
+            Text item= sensorCH4_Humidity               
 
  
         }
