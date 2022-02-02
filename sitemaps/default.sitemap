@@ -19,6 +19,13 @@ sitemap default label="Demo server" {
             Text item=Sunset_Time label="Залез"
         }
 
+        Frame label="FAN CONTROL:" {
+            Switch item=fan
+            Slider item=fan_Dimmer minValue=22 maxValue=100 step=1
+            Setpoint item=fan_Dimmer minValue=16 maxValue=100 step=1
+            Switch item=fan_Dimmer mappings=[0="Off", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
+        }
+
         Frame label="Данни от MODBUS сензорите:" {
             Text item= sesnsorTHL_Temperature 
             //Text item= sesnsorTHL_Temperature_transformed label= "Temperature [JS(divide10.js):%s °C]" ///"Livingroom [%.1f °C]"
@@ -52,4 +59,31 @@ sitemap default label="Demo server" {
             Text item= multisensor1_Reachable
             Text item=none
         }
+
+   Frame label="ORNO WE-515 Multitariff Electricity Meter - MODBUS" {
+        Text item=Meter_Power  label="Current power consumption"
+        Text item=Meter_TotalKWh  label="Total KWh to date"        
+        Text item=Meter_Voltage  label="VOLTAGE"
+        Text item=Meter_Ampers  label="Ampers"
+        Text item=Meter_Hz  label="Line frequency Hz"
+        Text item=Meter_Reactive_power  label="Reactive_power"
+        Text item=Meter_Apparent_power  label="Apparent_power"
+        Text item=Meter_Power_factor  label="Power_factor"
+        Text item=Meter_TotalKWh  label="Total KWh"        
+        Text item=none
+        Text item=Meter_TotalKWhT1  label="Total KWh Tarrif 1"
+        Text item=Meter_TotalKWhT2  label="Total KWh Tarrif 2"
+        Text item=Meter_TotalKWhT3  label="Total KWh Tarrif 3"
+        Text item=Meter_TotalKWhT4  label="Total KWh Tarrif 4"
+        Text item=Meter_Totalkvarh  label="Total kvarh"
+        Text item=none
+        Text item=Meter_TotalkvarhT1  label="Total kvarh Tarrif 1"
+        Text item=Meter_TotalkvarhT2  label="Total kvarh Tarrif 2"
+        Text item=Meter_TotalkvarhT3  label="Total kvarh Tarrif 3"
+        Text item=Meter_TotalkvarhT4  label="Total kvarh Tarrif 4"
+
+
+    }
+
+
 }

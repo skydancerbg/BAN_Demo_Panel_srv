@@ -23,5 +23,12 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.10.10.100", port
         // Type string : reachable     "Reachable"             [ stateTopic="tele/in_1/LWT" ]
         // Type number : dewpoint      "Dew point"             [ stateTopic="tele/in_2/SENSOR", transformationPattern="JSONPATH:$.SHT3X.DewPoint" ]        
     }
+    Thing topic blind_control "Living Room Dimmer" @ "Living Room" {
+        Type switch   : power      "Power"      [ stateTopic="tele/blind_control/STATE", transformationPattern="JSONPATH:$.POWER" , commandTopic="cmnd/blind_control/POWER"]
+        Type dimmer   : dimmer     "Dimmer"     [ stateTopic="tele/blind_control/STATE", commandTopic="cmnd/blind_control/DIMMER", transformationPattern="JSONPATH:$.Dimmer" ]      
+        // Type switch   : power      "Power"      [ stateTopic="sonoff/stat/LivingRoomDimmer/RESULT", transformationPattern="JSONPATH:$.POWER" , commandTopic="sonoff/cmnd/LivingRoomDimmer/POWER"]
+        // Type dimmer   : dimmer     "Dimmer"     [ stateTopic="sonoff/stat/LivingRoomDimmer/RESULT", commandTopic="sonoff/cmnd/LivingRoomDimmer/DIMMER", transformationPattern="JSONPATH:$.Dimmer" ]      
 
+
+    }
 }

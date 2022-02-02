@@ -7,3 +7,5 @@ Number:Temperature multisensor1_DS18B20_Temperature "ТЕМПЕРАТУРА НА
 Number multisensor1_RSSI                "WiFi - СИЛА НА СИГНАЛА [%d %%]"                <network>       { channel="mqtt:topic:localMQTTbroker:multisensor1:rssi" }
 String multisensor1_Reachable           "Устройството е Online/Offline: [%s]"           <presence>      { channel="mqtt:topic:localMQTTbroker:multisensor1:reachable" }
 
+Switch	fan	"Living Room Lights"					        <light>			{channel="mqtt:topic:localMQTTbroker:blind_control:power"}
+Dimmer	fan_Dimmer	"Living Room Lights Dimmer [%d %%]"		<brightness>	{channel="mqtt:topic:localMQTTbroker:blind_control:dimmer"}
