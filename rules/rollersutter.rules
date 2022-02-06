@@ -1,0 +1,74 @@
+
+// import java.math.BigDecimal
+// import java.text.DecimalFormat
+
+
+//////////////////////////////////////////////////////////////
+// item 'proxy_rollershutter' accepts: [PercentType, UpDownType, StopMoveType, RefreshType].
+//////////////////////////////////////////////////////////////
+
+rule "Send MQTT commands from proxy_rollershutter "
+when
+Item proxy_rollershutter received command
+then
+val mqttActions = getActions("mqtt","mqtt:broker:localMQTTbroker")
+val command = receivedCommand.toString.toUpperCase
+// logInfo("proxy_rollershutter ", "receivedCommand")
+// logInfo("proxy_rollershutter ", receivedCommand.toString.toUpperCase)
+logInfo("proxy_rollershutter ", command)
+
+    if(command == "UP"){
+        //  logInfo("proxy_rollershutter ", "UP")
+        mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterOpen1")
+
+    }else if(command == "STOP"){
+        // logInfo("proxy_rollershutter ", "STOP")
+        mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterStop1")
+    }else if(command == "DOWN"){
+        // logInfo("proxy_rollershutter ", "DOWN")
+        mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterClose1")
+    }else{
+        // Example command:  mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterPosition1 50")        
+        mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterPosition1 "+ command)
+    }
+
+end
+
+rule "Update position of proxy_rollershutter "
+when
+Item position received update
+then
+val posAsNumber = position.state as Number
+    logInfo("Update proxy_rollershutter", posAsNumber.toString)
+    //NOTE: THE LINE BELOW IS GETTING AN UNDERLINING AS ERROR FROM VS CODE, BUT IT WORKS FINE!!!!!!!
+    proxy_rollershutter.postUpdate(new PercentType(posAsNumber.toString))
+end
+
+
+
+
+// rule "Item proxy_rollershutter "
+// when
+// Item proxy_rollershutter received command
+// then
+// val mqttActions = getActions("mqtt","mqtt:broker:localMQTTbroker")
+// logInfo("proxy_rollershutter ", "receivedCommand")
+// switch(receivedCommand.toString.toUpperCase){
+//     case "UP": {
+//         //  logInfo("proxy_rollershutter ", "UP")
+//         mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterOpen1")
+//         }
+//     case "STOP": {
+//         // logInfo("proxy_rollershutter ", "STOP")
+//         // mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterStop1")
+//         mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterPosition1 50")        
+//     }
+//     case "DOWN": {
+//         // logInfo("proxy_rollershutter ", "DOWN")
+//         mqttActions.publishMQTT("cmnd/blinds_control/Backlog", "ShutterClose1")
+//     }
+// }
+// end
+
+// <item>.postUpdate(state)
+// , autoupdate="false"

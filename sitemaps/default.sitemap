@@ -19,12 +19,37 @@ sitemap default label="Demo server" {
             Text item=Sunset_Time label="Залез"
         }
 
-        Frame label="FAN CONTROL:" {
-            Switch item=fan
-            Slider item=fan_Dimmer minValue=22 maxValue=100 step=1
-            Setpoint item=fan_Dimmer minValue=16 maxValue=100 step=1
-            Switch item=fan_Dimmer mappings=[0="Off", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
+        Frame label="Blinds control:" {
+            Default item=proxy_rollershutter
+            Slider item=proxy_rollershutter label="rollershutter [%d %%]"
+            // Switch item=proxy_rollershutter mappings=[0=" DOWN ", 15="15%",30="30%",  78="78%" , 100=" UP "]
+            Switch item=proxy_rollershutter mappings=[15="15%", 30="30%", 50="50%",  65="65%" , 80="80%"]
+            Text item=position
+            Text item=none
+            Text item=none
+            Switch item=proxy_rollershutter label="position [%f]"
+            // Text item=none
+            // Text item=none
+            // Switch item=rollershutter
+            // Don’t use Switch in the Sitemap but Default???
+            // Default item=rollershutter
+            // Slider item=rollershutter icon="rollershutter"
+            // Switch item=rollershutter mappings=[0=" DOWN ", 15="15%",30="30%",  78="78%" , 100=" UP "]
+           Slider item=position
+           Setpoint item=position
+            // Switch item=power1
+            // Switch item=power2
+
+            // Switch	item=gRollladenEG label="Rollos" mappings=[1="AUF", STOP="STOP", 99="ZU", 88="3/4"] icon="rollershutter"
+
         }
+
+        // Frame label="FAN CONTROL:" {
+        //     Switch item=fan
+        //     Slider item=fan_Dimmer minValue=22 maxValue=100 step=1
+        //     Setpoint item=fan_Dimmer minValue=16 maxValue=100 step=1
+        //     Switch item=fan_Dimmer mappings=[0="Off", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
+        // }
 
         Frame label="Данни от MODBUS сензорите:" {
             Text item= sesnsorTHL_Temperature 
@@ -50,7 +75,7 @@ sitemap default label="Demo server" {
  
         }
         
-        Frame label="WiFi MQTT сензор базиран на NodeMCU (ESP_8266):" {
+        Frame label="WiFi MQTT сензори базирани на NodeMCU (ESP_8266):" {
             Text item= multisensor1_DHT22_Temperature 
             Text item= multisensor1_DS18B20_Temperature 
             Text item= multisensor1_DHT22_Humidity 
@@ -58,6 +83,8 @@ sitemap default label="Demo server" {
             Text item= multisensor1_RSSI 
             Text item= multisensor1_Reachable
             Text item=none
+            Text item=senseair_s8_CO2
+            Text item=senseair_s8_Temperature
         }
 
    Frame label="ORNO WE-515 Multitariff Electricity Meter - MODBUS" {
