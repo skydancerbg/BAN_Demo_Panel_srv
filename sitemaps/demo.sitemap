@@ -1,59 +1,63 @@
+
+// LINK TO THIS PAGE:
+// http://10.10.10.100:38080/basicui/app?sitemap=demo
+
+sitemap demo label="Кибер-физична система (КФС) за интелигентно управление" {
 //divide-number-when-displaying-in-sitemap
 // https://community.openhab.org/t/divide-number-when-displaying-in-sitemap/36577
-
-sitemap default label="Demo server" {
 
         // Frame  {
         // Frame label="КЪЩАТА НА ДЕСИ И СТЕФАН" {
         Frame label="ДАТА/ЧАС, ИЗГРЕВ И ЗАЛЕЗ СЛЪНЦЕ:" {
-            // Text item=Date //label="Livingroom"
-            //ФОРМАТ С PM, БЕЗ ДЕН:
-            // Text item=Date
-            // Text item=DateDiffFormat //label="Livingroo"
             Text item=DateTimeBG24hFormat
             Text item=systems_OK
-            //Text item=systems_OK 
-            // Text item=systems_WARNING_yellow
-            // Text item=systems_WARNING_red 
             Text item=Sunrise_Time label="Изгрев"
             Text item=Sunset_Time label="Залез"
         }
 
-        Frame label="Blinds control:" {
-            Default item=proxy_rollershutter
-            Slider item=proxy_rollershutter label="Щора [%d %%]"
-            // Switch item=proxy_rollershutter mappings=[0=" DOWN ", 15="15%",30="30%",  78="78%" , 100=" UP "]
-            Switch item=proxy_rollershutter mappings=[0="Затворена",15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
-            Text item=position
+        Frame label="Данни от сензорите:" {
+            Text item= sensorCH4_Temperature
+            Text item= sensorCH4_Humidity               
+            Text item= multisensor1_DHT22_Temperature 
+            Text item= multisensor1_DHT22_Humidity 
+            Text item= multisensor1_DHT22_Dewpoint
+            Text item= multisensor1_DS18B20_Temperature 
+            Text item= sensorTHL_Luminosity
+            Text item= multisensor1_Illuminance 
+            Text item= sensorNH3_amonia
+            Text item= sensorCH4_methane_ppm            
+            Text item= sensorPM_2dot5
+            Text item= sensorPM_10
+            Text item= sensorCH4_methane_lel            
             Text item=none
-            Text item=none
-            Switch item=proxy_rollershutter label="position [%f]"
-            // Text item=none
-            // Text item=none
-            // Switch item=rollershutter
-            // Don’t use Switch in the Sitemap but Default???
-            // Default item=rollershutter
-            // Slider item=rollershutter icon="rollershutter"
-            // Switch item=rollershutter mappings=[0=" DOWN ", 15="15%",30="30%",  78="78%" , 100=" UP "]
-           Slider item=position
-           Setpoint item=position
-            // Switch item=power1
-            // Switch item=power2
-
-            // Switch	item=gRollladenEG label="Rollos" mappings=[1="AUF", STOP="STOP", 99="ZU", 88="3/4"] icon="rollershutter"
-
+            Text item=Meter_Power  label="Current power consumption"
+            Text item=Meter_TotalKWh  label="Total KWh to date"        
+            Text item=Meter_Voltage  label="VOLTAGE"
+            Text item=Meter_Ampers  label="Ampers"
         }
 
-        // Frame label="FAN CONTROL:" {
-        //     Switch item=fan
-        //     Slider item=fan_Dimmer minValue=22 maxValue=100 step=1
-        //     Setpoint item=fan_Dimmer minValue=16 maxValue=100 step=1
-        //     Switch item=fan_Dimmer mappings=[0="Off", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
-        // }
+        Frame label="Управление на щори:" {
+            Default item=proxy_rollershutter
+            Slider item=proxy_rollershutter label="Позиция на щората [%d %%]"
+            // Switch item=proxy_rollershutter mappings=[0="Затворена",15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
+            Switch item=proxy_rollershutter label="Щора" mappings=[NULL= "Затворена", 15="15%", 30="30%", 50="50%",  65="65%" , 80="80%", 100="Отворена"]
+
+        }        
+
+        Frame label="Управление на вентилатор:" {
+            Switch item=fan label="Вентилатор Вкл./Изкл."
+            Slider item=fan_Dimmer label="Вентилатор обороти [%d %% об/мин]" minValue=22 maxValue=100 step=1
+            Switch item=fan_Dimmer label="Вентилатор обороти [%d %% RPM]" mappings=[0="Off", 1="1%",18="18%" ,22="22%", 50="50%", 100="100%"]
+        }
+        
+        Frame label="Управление на Отопление/Охлаждане:" {
+            Switch  item=multisensor1_relay1   icon="switch"    label="Отопление Вкл./Изкл."
+            Switch  item=multisensor1_relay2   icon="switch"    label="Охлаждане Вкл./Изкл."
+ 
+        }
 
         Frame label="Данни от MODBUS сензорите:" {
             Text item= sesnsorTHL_Temperature 
-            //Text item= sesnsorTHL_Temperature_transformed label= "Temperature [JS(divide10.js):%s °C]" ///"Livingroom [%.1f °C]"
             Text item= sensorTHL_Humidity 
             Text item= sensorTHL_Luminosity
             Text item=none
@@ -65,16 +69,8 @@ sitemap default label="Demo server" {
             Text item=none
             Text item= sensorCH4_Temperature
             Text item= sensorCH4_Humidity               
+        }
 
- 
-        }
-        
-        Frame label="Ръчно управление на системи:" {
-            Switch  item=multisensor1_relay1   icon="switch"    label="Система 1 (Лампа 1)"
-            Switch  item=multisensor1_relay2   icon="switch"    label="Система 2 (Лампа 2)"
- 
-        }
-        
         Frame label="WiFi MQTT сензори базирани на NodeMCU (ESP_8266):" {
             Text item= multisensor1_DHT22_Temperature 
             Text item= multisensor1_DS18B20_Temperature 
@@ -85,7 +81,7 @@ sitemap default label="Demo server" {
             Text item= multisensor1_Reachable
             Text item=none
             Text item=senseair_s8_CO2
-            Text item=senseair_s8_Temperature
+            // Text item=senseair_s8_Temperature
         }
 
    Frame label="ORNO WE-515 Multitariff Electricity Meter - MODBUS" {
@@ -112,6 +108,5 @@ sitemap default label="Demo server" {
 
 
     }
-
 
 }
