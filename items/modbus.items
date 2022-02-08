@@ -7,19 +7,21 @@
 // ?? profile gainOffset not working:
 // ?? Number:Temperature sesnsorTHL_Temperature    { channel="modbus:data:sensorTHL_id_10:temperature:tempCelsius:number"[ profile="modbus:gainOffset", gain="0.1 °C", pre-gain-offset="0" ] }
 
-Number:Temperature sesnsorTHL_Temperature   "Temperature [%.1f °C]" <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)       {channel="modbus:data:sensorTHL_id_10:sensorData:tempCelsius:number"}
-Number sensorTHL_Humidity       "Humidity [%.1f %%Rh]"              <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:humidity:number"}
-Number sensorTHL_Luminosity     "Illuminance (Modbus THL) [%d lux]" <illuminance>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:lux:number"}
+Number:Temperature sesnsorTHL_Temperature   "Температура [%.1f °C]" <temperature>   (gTemperature_measurments, gBarn_Inside_Temperature, gPersstOnChngOn1min)       {channel="modbus:data:sensorTHL_id_10:sensorData:tempCelsius:number"}
+Number sensorTHL_Humidity       "Относителна влажност [%.1f %%Rh]"              <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:humidity:number"}
+Number sensorTHL_Luminosity     "Осветеност (Modbus THL) [%d lux]" <illuminance>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:lux:number"}
+// Number sensorTHL_Luminosity     "Illuminance (Modbus THL) [%d lux]" <illuminance>    (gPersstOnChngOn1min)   {channel="modbus:data:sensorTHL_id_10:sensorData:lux:number"}
 
-Number sensorNH3_amonia         "Amonia (Modbus NH₃) [%.2f ppm]"    <amonia>        (gPersstOnChngOn1min)   {channel="modbus:data:sensorNH3_id_11:amonia:nh3:number"}
+Number sensorNH3_amonia         "Амоняк (Modbus NH₃) [%.2f ppm]"    <amonia>        (gPersstOnChngOn1min)   {channel="modbus:data:sensorNH3_id_11:amonia:nh3:number"}
 
-Number sensorPM_2dot5      "Particulate Matter 2.5 (Modbus PM2.5)  [%d ppm]"    <dustsmall>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm2dot5:number"}
-Number sensorPM_10         "Particulate Matter 10 (Modbus PM10)   [%d ppm]"     <dustbig>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm10:number"}
+Number sensorPM_2dot5      "Финни прахови частици 2.5 (Modbus PM2.5)  [%d ppm]"    <dustsmall>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm2dot5:number"}
+Number sensorPM_10         "Финни прахови частици 10 (Modbus PM10)   [%d ppm]"     <dustbig>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm10:number"}
+// Number sensorPM_10         "Particulate Matter 10 (Modbus PM10)   [%d ppm]"     <dustbig>       (gPersstOnChngOn1min)   {channel="modbus:data:sensorParticulateMatter:particulatematter:pm10:number"}
 
-Number sensorCH4_methane_lel                "Methane LEL (Lower Explosive Level) [%d %% LEL]"         <explosive_warning>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:ch4_LEL:number"}
-Number sensorCH4_methane_ppm                "Methane (Modbus CH₄) [%d ppm]"                           <methane>       (gPersstOnChngOn1min)   
+Number sensorCH4_methane_lel                "Метан LEL (Lower Explosive Level) [%d %% LEL]"         <explosive_warning>     (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:ch4_LEL:number"}
+Number sensorCH4_methane_ppm                "Метан (Modbus CH₄) [%d ppm]"                           <methane>       (gPersstOnChngOn1min)   
 Number:Temperature sensorCH4_Temperature    "ТЕМПЕРАТУРА (Modbus CH4) [%.1f °C]"                      <temperature>   (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:temperatureC:number"}
-Number sensorCH4_Humidity                   "ВЛАЖНОСТ (Modbus CH4) [%.1f %%Rh]"                       <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:humidityPercent:number"}
+Number sensorCH4_Humidity                   "Относителна влажност (Modbus CH4) [%.1f %%Rh]"                       <humidity>      (gPersstOnChngOn1min)   {channel="modbus:data:sensorMethaneTH:sensorData:humidityPercent:number"}
 
 // ORNO 515 POWER METER
 // Number: ElectricPotential OU_V "Voltage [% .2f V]" <line> (OU_Counters, counters) {channel = "modbus: data: localSerial: volt: V: number"}

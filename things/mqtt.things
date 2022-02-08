@@ -38,6 +38,23 @@ Bridge mqtt:broker:localMQTTbroker "localMQTTbroker" [ host="10.10.10.100", port
             Type number : co2                   "CO2"                   [ stateTopic="tele/senseair_s8/SENSOR", transformationPattern="JSONPATH:$.S8.CarbonDioxide" ]       
             Type string : reachable             "Reachable"             [ stateTopic="tele/senseair_s8/LWT" ]
     }
+
+    Thing topic mh_z19b "mh_z19b" @ "Demo panel" {
+        Channels:
+            Type number : co2                   "CO2"                   [ stateTopic="tele/mh_z19b_co2/SENSOR", transformationPattern="JSONPATH:$.MHZ19B.CarbonDioxide" ]       
+            Type string : reachable             "Reachable"             [ stateTopic="tele/mh_z19b_co2/LWT" ]
+    }
+
+// {"Time":"2022-02-08T12:44:44","SCD30":{"CarbonDioxide":780,"eCO2":810,"Temperature":29.4,"Humidity":23.3,"DewPoint":6.3},"TempUnit":"C"}
+    Thing topic scd30 "scd30" @ "Demo panel" {
+        Channels:
+            Type number : co2                   "CarbonDioxide" [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.CarbonDioxide" ]       
+            Type number : eco2                  "eCO2"          [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.eCO2" ]       
+            Type number : temperature           "Temperature"   [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.Temperature" ]       
+            Type number : humidity              "Humidity"      [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.Humidity" ]       
+            Type number : dewpoint              "DewPoint"      [ stateTopic="tele/scd30_co2/SENSOR", transformationPattern="JSONPATH:$.SCD30.DewPoint" ]       
+            Type string : reachable             "Reachable"     [ stateTopic="tele/scd30_co2/LWT" ]
+    }
     
 
     Thing topic fan_control "Fan controller" @ "Demo panel" {
